@@ -60,7 +60,30 @@ const posts = [
 const postContainer = document.getElementById("container");
 
 
-posts.forEach( el => {
+
+domInsertion(posts)
+
+const allProfilePics = Array.from(document.getElementsByClassName("profile-pic"))
+
+
+
+
+console.log(allProfilePics)
+
+
+
+
+
+
+
+
+
+
+
+
+function domInsertion(posts){
+
+  posts.forEach( el => {
 
   let italianDate = reverseDate(el.created)
   
@@ -73,7 +96,7 @@ posts.forEach( el => {
     <div class="post__header">
         <div class="post-meta">                    
             <div class="post-meta__icon">
-                <img class="profile-pic" src="${el.author.image}" alt="${el.author.name}">                    
+                <img class="profile-pic" src="${el.author.image ? el.author.image : "null"}" alt="${el.author.name}">                    
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${el.author.name}</div>
@@ -112,3 +135,5 @@ posts.forEach( el => {
     return dateReversed
   }
 })
+}
+
