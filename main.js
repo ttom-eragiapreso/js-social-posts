@@ -62,10 +62,10 @@ const postContainer = document.getElementById("container");
 
 posts.forEach( el => {
 
-  if(el.author.image == null){
-    el.author.image = "ciao"
-  }
+  let italianDate = reverseDate(el.created)
+  
 
+  
   let post;
 
   post = `
@@ -77,7 +77,7 @@ posts.forEach( el => {
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${el.author.name}</div>
-                <div class="post-meta__time">${el.created}</div>
+                <div class="post-meta__time">${italianDate}</div>
             </div>                    
         </div>
     </div>
@@ -102,4 +102,13 @@ posts.forEach( el => {
   `;
 
   postContainer.innerHTML += post;
+
+  function reverseDate(date){
+  let dateReversed;
+  let year = date.substring(0, 4);
+  let month = date.substring(5, 7);
+    let day = date.substring(8)
+    dateReversed = `${day}-${month}-${year}`
+    return dateReversed
+  }
 })
