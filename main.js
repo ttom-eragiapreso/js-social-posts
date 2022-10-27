@@ -63,32 +63,28 @@ const postContainer = document.getElementById("container");
 
 domInsertion(posts)
 
-const allProfilePics = Array.from(document.getElementsByClassName("profile-pic"))
-
-
-
-
-console.log(allProfilePics)
-
-
-
-
-
-
-
-
 
 
 
 
 function domInsertion(posts){
 
+
+  
+  
   posts.forEach( el => {
 
+  let imageOrDiv;
   let italianDate = reverseDate(el.created)
-  
+  let initials = getInitials(el.author.name);  
 
-  
+  if(el.author.image){
+    imageOrDiv = `<img class="profile-pic" src="${el.author.image}" alt="${el.author.name}">`
+  }else {
+    imageOrDiv = `<div>${initials}</div>`
+  }
+
+
   let post;
 
   post = `
@@ -96,7 +92,7 @@ function domInsertion(posts){
     <div class="post__header">
         <div class="post-meta">                    
             <div class="post-meta__icon">
-                <img class="profile-pic" src="${el.author.image ? el.author.image : "null"}" alt="${el.author.name}">                    
+                  ${imageOrDiv}              
             </div>
             <div class="post-meta__data">
                 <div class="post-meta__author">${el.author.name}</div>
@@ -125,6 +121,17 @@ function domInsertion(posts){
   `;
 
   postContainer.innerHTML += post;
+
+
+
+
+  function getInitials(name){
+    let initialsArray = name.split(" ")
+    let initials = `${initialsArray[0][0].toUpperCase()} ${initialsArray[1][0].toUpperCase()}`
+    return initials;
+  }
+
+
 
   function reverseDate(date){
   let dateReversed;
